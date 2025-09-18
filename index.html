@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wira — Portfolio</title>
+    <meta name="description" content="Wira (Pannavira) — Informatics Engineering student. Web dev, data, and AI/ML projects." />
+    <meta name="theme-color" content="#0ea5e9" />
+
+    <!-- OpenGraph / Twitter -->
+    <meta property="og:title" content="Wira — Portfolio" />
+    <meta property="og:description" content="Web dev • Data • AI/ML. Projects, resume, contact." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pannavira.github.io/" />
+    <meta property="og:image" content="https://pannavira.github.io/og-banner.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Tailwind via CDN (no build step) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial'],
+            },
+            boxShadow: {
+              soft: '0 8px 20px rgba(2,132,199,.12)'
+            }
+          }
+        },
+        darkMode: 'class'
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+      /* Small, mobile-first refinements */
+      .container { max-width: 1060px; }
+      .glass { backdrop-filter: saturate(180%) blur(10px); background: rgba(255,255,255,.75); }
+      .dark .glass { background: rgba(17,24,39,.7); }
+      /* Button hit area: larger for mobile per your preference */
+      .btn { padding: .9rem 1.1rem; }
+    </style>
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Wira (Pannavira)",
+      "url": "https://pannavira.github.io/",
+      "sameAs": [
+        "https://github.com/Pannavira",
+        "https://www.linkedin.com/in/pannavira/"
+      ],
+      "jobTitle": "Informatics Engineering Student",
+      "alumniOf": "Universitas Buddhi Dharma",
+      "knowsAbout": ["Web Development", "Next.js", "Laravel", "Supabase", "Data Science", "AI/ML"]
+    }
+    </script>
+  </head>
+
+  <body class="font-display antialiased bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100">
+    <!-- Sticky Nav -->
+    <header class="sticky top-0 z-50 border-b border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-900/60 glass">
+      <nav class="container mx-auto flex items-center justify-between px-4 py-3">
+        <a href="#home" class="text-lg font-bold tracking-tight">Wira<span class="text-sky-500">.</span></a>
+        <div class="flex items-center gap-3 text-sm">
+          <a class="px-3 py-2 hover:text-sky-600" href="#projects">Projects</a>
+          <a class="px-3 py-2 hover:text-sky-600" href="#experience">Experience</a>
+          <a class="px-3 py-2 hover:text-sky-600" href="#skills">Skills</a>
+          <a class="px-3 py-2 hover:text-sky-600" href="#contact">Contact</a>
+          <button id="themeToggle" aria-label="Toggle dark mode" class="btn rounded-xl bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 transition hover:shadow-soft">
+            <span id="themeIcon">🌙</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="container mx-auto px-4 pt-12 pb-16">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div class="space-y-5">
+          <span class="inline-flex items-center gap-2 rounded-full bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300 px-3 py-1 text-xs font-semibold">Open to Internship & Freelance</span>
+          <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Hi, I'm <span class="text-sky-600">Wira</span> — I build web apps and data-driven solutions.</h1>
+          <p class="text-slate-600 dark:text-slate-300">Informatics Engineering @ UBD. Focus on <strong>Next.js/Laravel/Supabase</strong>, <strong>data & AI/ML</strong>. I love turning ideas into fast, accessible products.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#projects" class="btn rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition">View Projects</a>
+            <a href="https://www.linkedin.com/in/pannavira/" target="_blank" class="btn rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">LinkedIn</a>
+            <a href="mailto:work.pannavira@gmail.com" class="btn rounded-xl border border-slate-300 dark:border-slate-700">Email Me</a>
+          </div>
+          <ul class="text-sm text-slate-500 dark:text-slate-400 list-disc pl-5">
+            <li>Currently building: PIKARU Asset Management (Next.js + Supabase + RLS)</li>
+            <li>Research: MySQL vs MongoDB performance for big-data web apps</li>
+            <li>Fun: HairzoneStyle — AI hairstyle changer web app</li>
+          </ul>
+        </div>
+        <div class="relative">
+          <div class="aspect-square rounded-2xl bg-gradient-to-br from-sky-200 to-sky-50 dark:from-sky-900/30 dark:to-slate-800 p-1">
+            <img alt="Wira avatar" src="https://avatars.githubusercontent.com/u/104241402?v=4" class="w-full h-full object-cover rounded-2xl"/>
+          </div>
+          <div class="absolute -bottom-3 -right-3 text-xs bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 shadow-soft">Based in Tangerang, ID</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects (auto-fetch via GitHub API) -->
+    <section id="projects" class="container mx-auto px-4 py-12">
+      <div class="flex items-end justify-between mb-6">
+        <h2 class="text-2xl md:text-3xl font-bold">Featured Projects</h2>
+        <a href="https://github.com/Pannavira?tab=repositories" class="text-sky-600 hover:underline text-sm">View all →</a>
+      </div>
+      <div id="projectGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <template id="projectCardTmpl">
+        <a class="block group rounded-2xl border border-slate-200 dark:border-slate-800 p-5 hover:shadow-soft transition bg-white dark:bg-slate-800" target="_blank" rel="noopener">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-semibold group-hover:text-sky-600 truncate"></h3>
+            <span class="text-xs rounded-full bg-slate-100 dark:bg-slate-700 px-2 py-1 repo-language"></span>
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-300 line-clamp-3 repo-desc"></p>
+          <div class="mt-4 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+            <span class="stars">★ 0</span>
+            <span class="updated">Updated —</span>
+          </div>
+        </a>
+      </template>
+    </section>
+
+    <!-- Experience / Education -->
+    <section id="experience" class="container mx-auto px-4 py-12">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6">Experience & Education</h2>
+      <ol class="relative border-l border-slate-200 dark:border-slate-800 ml-3">
+        <li class="mb-8 ml-6">
+          <div class="absolute w-3 h-3 bg-sky-500 rounded-full -left-1.5 mt-2"></div>
+          <h3 class="font-semibold">Informatics Engineering — Universitas Buddhi Dharma</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">Focus: Web Dev, Data, AI/ML • 2022—present</p>
+        </li>
+        <li class="mb-8 ml-6">
+          <div class="absolute w-3 h-3 bg-sky-500 rounded-full -left-1.5 mt-2"></div>
+          <h3 class="font-semibold">Freelance Web Developer</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">Next.js, Laravel, WordPress/Elementor • Delivered e‑course sites & dashboards</p>
+        </li>
+        <li class="mb-2 ml-6">
+          <div class="absolute w-3 h-3 bg-sky-500 rounded-full -left-1.5 mt-2"></div>
+          <h3 class="font-semibold">Research — MySQL vs MongoDB Performance</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">Benchmarking CRUD/aggregation & scaling strategies for web apps</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="container mx-auto px-4 py-12">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6">Skills</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800">
+          <h3 class="font-semibold mb-2">Frontend</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">React, Next.js, Tailwind, Shadcn UI, Charts, Responsive UX</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800">
+          <h3 class="font-semibold mb-2">Backend</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">Node.js, Laravel, REST APIs, Supabase (Auth, RLS), Prisma/ORM</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800">
+          <h3 class="font-semibold mb-2">Data & ML</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">Python, Pandas, Scikit-learn, basic CV/LLM APIs, Visualization</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800">
+          <h3 class="font-semibold mb-2">Databases</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">MySQL, MongoDB, PostgreSQL, Query Optimization, Indexing</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800">
+          <h3 class="font-semibold mb-2">Cloud & Tools</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">GitHub Actions, Vercel, Docker (basic), Netlify, CI/CD</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800">
+          <h3 class="font-semibold mb-2">Soft Skills</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">Communication, Documentation, Mentoring, Problem‑solving</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="container mx-auto px-4 py-12">
+      <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-bold">Let's build something!</h2>
+            <p class="text-slate-600 dark:text-slate-300">Open for internships, freelance, and collaborations.</p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a href="mailto:work.pannavira@gmail.com" class="btn rounded-xl bg-sky-600 text-white hover:bg-sky-700">Email</a>
+            <a href="https://www.linkedin.com/in/pannavira/" target="_blank" class="btn rounded-xl border border-slate-300 dark:border-slate-700">LinkedIn</a>
+            <a href="https://github.com/Pannavira" target="_blank" class="btn rounded-xl border border-slate-300 dark:border-slate-700">GitHub</a>
+          </div>
+        </div>
+        <!-- Optional Formspree (replace with your endpoint) -->
+        <form action="https://formspree.io/f/your-id" method="POST" class="mt-6 grid sm:grid-cols-2 gap-4">
+          <input name="name" required placeholder="Your name" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3" />
+          <input type="email" name="email" required placeholder="Your email" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3" />
+          <textarea name="message" required placeholder="Tell me about the project..." class="sm:col-span-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 h-32"></textarea>
+          <button class="sm:col-span-2 btn rounded-xl bg-sky-600 text-white hover:bg-sky-700">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="container mx-auto px-4 py-10 text-center text-sm text-slate-500 dark:text-slate-400">
+      <div>© <span id="year"></span> Wira • Built with Tailwind • Hosted on GitHub Pages</div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      // Year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Theme toggle persistence
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const saved = localStorage.getItem('theme');
+      const setTheme = (val) => {
+        document.documentElement.classList.toggle('dark', val === 'dark');
+        themeIcon.textContent = val === 'dark' ? '☀️' : '🌙';
+        localStorage.setItem('theme', val);
+      };
+      setTheme(saved || (prefersDark ? 'dark' : 'light'));
+      themeToggle.addEventListener('click', () => {
+        const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+        setTheme(next);
+      });
+
+      // Fetch some public repos and render cards
+      async function loadRepos() {
+        try {
+          const res = await fetch('https://api.github.com/users/Pannavira/repos?sort=updated&per_page=9');
+          const repos = await res.json();
+          const grid = document.getElementById('projectGrid');
+          const tmpl = document.getElementById('projectCardTmpl');
+
+          const featuredKeywords = ['pikar', 'asset', 'hair', 'style', 'mysql', 'mongo', 'api', 'dashboard'];
+
+          repos
+            .filter(r => !r.fork)
+            .sort((a,b) => {
+              const aFeat = featuredKeywords.some(k => (a.name + ' ' + (a.description||'')).toLowerCase().includes(k));
+              const bFeat = featuredKeywords.some(k => (b.name + ' ' + (b.description||'')).toLowerCase().includes(k));
+              return (bFeat - aFeat) || (new Date(b.pushed_at) - new Date(a.pushed_at));
+            })
+            .slice(0, 6)
+            .forEach(repo => {
+              const node = tmpl.content.cloneNode(true);
+              const card = node.querySelector('a');
+              card.href = repo.html_url;
+              node.querySelector('h3').textContent = repo.name;
+              node.querySelector('.repo-desc').textContent = repo.description || 'No description provided.';
+              node.querySelector('.repo-language').textContent = repo.language || '—';
+              node.querySelector('.stars').textContent = `★ ${repo.stargazers_count}`;
+              const updated = new Date(repo.pushed_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+              node.querySelector('.updated').textContent = `Updated ${updated}`;
+              grid.appendChild(node);
+            });
+        } catch (e) {
+          console.error('Repo load failed', e);
+          document.getElementById('projectGrid').innerHTML = '<p class="text-slate-500">Could not load repositories right now.</p>';
+        }
+      }
+      loadRepos();
+    </script>
+
+    <!-- (Optional) Google Analytics - replace G-XXXX -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXX');
+    </script> -->
+  </body>
+</html>
