@@ -15,34 +15,52 @@
     <meta property="og:image" content="https://pannavira.github.io/og-banner.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Tailwind via CDN (no build step) -->
+    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             fontFamily: {
-              display: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial'],
+              mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "monospace"],
+            },
+            colors: {
+              code: {
+                bg: '#0B1020',      // deep navy
+                panel: '#0F172A',   // slate-900-ish
+                ink: '#E2E8F0',     // slate-200
+                dim: '#94A3B8',     // slate-400
+                accent: '#22D3EE',  // cyan-400
+                accent2: '#A78BFA', // violet-400
+                success: '#10B981',
+                warn: '#F59E0B',
+                danger: '#EF4444',
+              }
             },
             boxShadow: {
-              soft: '0 8px 20px rgba(2,132,199,.12)'
+              glow: '0 0 0 1px rgba(34,211,238,0.25), 0 10px 30px rgba(34,211,238,0.08)'
+            },
+            backgroundImage: {
+              grid: 'linear-gradient(transparent 23px, rgba(148,163,184,0.08) 24px), linear-gradient(90deg, transparent 23px, rgba(148,163,184,0.08) 24px)',
             }
           }
-        },
-        darkMode: 'class'
+        }
       }
     </script>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-      /* Small, mobile-first refinements */
       .container { max-width: 1060px; }
-      .glass { backdrop-filter: saturate(180%) blur(10px); background: rgba(255,255,255,.75); }
-      .dark .glass { background: rgba(17,24,39,.7); }
-      /* Button hit area: larger for mobile per your preference */
-      .btn { padding: .9rem 1.1rem; }
+      .btn { padding: .9rem 1.1rem; } /* larger mobile hit area */
+      .cursor-blink::after { content: '▌'; animation: blink 1s steps(1,end) infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+      .code-bar { background: linear-gradient(90deg, #22D3EE22, #A78BFA22); }
+      .code-window { border: 1px solid rgba(148,163,184,.15); }
     </style>
 
     <!-- JSON-LD Schema -->
@@ -52,162 +70,149 @@
       "@type": "Person",
       "name": "Wira (Pannavira)",
       "url": "https://pannavira.github.io/",
-      "sameAs": [
-        "https://github.com/Pannavira",
-        "https://www.linkedin.com/in/pannavira/"
-      ],
+      "sameAs": ["https://github.com/Pannavira","https://www.linkedin.com/in/pannavira/"],
       "jobTitle": "Informatics Engineering Student",
       "alumniOf": "Universitas Buddhi Dharma",
-      "knowsAbout": ["Web Development", "Next.js", "Laravel", "Supabase", "Data Science", "AI/ML"]
+      "knowsAbout": ["Web Development","Next.js","Laravel","Supabase","Data Science","AI/ML"]
     }
     </script>
   </head>
 
-  <body class="font-display antialiased bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100">
-    <!-- Sticky Nav -->
-    <header class="sticky top-0 z-50 border-b border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-900/60 glass">
+  <body class="font-mono bg-code-bg text-code-ink dark:bg-code-bg dark:text-code-ink min-h-screen">
+    <!-- Subtle code grid background -->
+    <div aria-hidden class="fixed inset-0 -z-10 bg-grid bg-[size:24px_24px]"></div>
+
+    <!-- Top Nav (code vibe) -->
+    <header class="sticky top-0 z-50 border-b border-slate-800/60 backdrop-blur bg-code-bg/80">
       <nav class="container mx-auto flex items-center justify-between px-4 py-3">
-        <a href="#home" class="text-lg font-bold tracking-tight">Wira<span class="text-sky-500">.</span></a>
-        <div class="flex items-center gap-3 text-sm">
-          <a class="px-3 py-2 hover:text-sky-600" href="#projects">Projects</a>
-          <a class="px-3 py-2 hover:text-sky-600" href="#experience">Experience</a>
-          <a class="px-3 py-2 hover:text-sky-600" href="#skills">Skills</a>
-          <a class="px-3 py-2 hover:text-sky-600" href="#contact">Contact</a>
-          <button id="themeToggle" aria-label="Toggle dark mode" class="btn rounded-xl bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 transition hover:shadow-soft">
-            <span id="themeIcon">🌙</span>
-          </button>
+        <a href="#home" class="text-base font-semibold tracking-tight flex items-center gap-2">
+          <span class="text-cyan-300">&lt;/&gt;</span>
+          <span>Wira</span>
+        </a>
+        <div class="flex items-center gap-2 text-xs md:text-sm">
+          <a class="px-3 py-2 hover:text-cyan-300" href="#projects">projects()</a>
+          <a class="px-3 py-2 hover:text-cyan-300" href="#experience">experience()</a>
+          <a class="px-3 py-2 hover:text-cyan-300" href="#skills">skills()</a>
+          <a class="px-3 py-2 hover:text-cyan-300" href="#contact">contact()</a>
+          <button id="themeToggle" aria-label="Toggle dark mode" class="btn rounded-lg border border-slate-800 hover:shadow-glow">theme.toggle()</button>
         </div>
       </nav>
     </header>
 
-    <!-- Hero -->
-    <section id="home" class="container mx-auto px-4 pt-12 pb-16">
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <div class="space-y-5">
-          <span class="inline-flex items-center gap-2 rounded-full bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300 px-3 py-1 text-xs font-semibold">Open to Internship & Freelance</span>
-          <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Hi, I'm <span class="text-sky-600">Wira</span> — I build web apps and data-driven solutions.</h1>
-          <p class="text-slate-600 dark:text-slate-300">Informatics Engineering @ UBD. Focus on <strong>Next.js/Laravel/Supabase</strong>, <strong>data & AI/ML</strong>. I love turning ideas into fast, accessible products.</p>
-          <div class="flex flex-wrap gap-3">
-            <a href="#projects" class="btn rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition">View Projects</a>
-            <a href="https://www.linkedin.com/in/pannavira/" target="_blank" class="btn rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">LinkedIn</a>
-            <a href="mailto:work.pannavira@gmail.com" class="btn rounded-xl border border-slate-300 dark:border-slate-700">Email Me</a>
+    <!-- Hero / Intro like a terminal banner -->
+    <section id="home" class="container mx-auto px-4 pt-10 pb-14">
+      <div class="code-window rounded-xl overflow-hidden shadow-glow bg-code-panel">
+        <div class="code-bar flex items-center gap-2 px-3 py-2 border-b border-slate-800">
+          <div class="flex gap-1.5">
+            <span class="h-3 w-3 rounded-full bg-red-400/60"></span>
+            <span class="h-3 w-3 rounded-full bg-yellow-400/60"></span>
+            <span class="h-3 w-3 rounded-full bg-green-400/60"></span>
           </div>
-          <ul class="text-sm text-slate-500 dark:text-slate-400 list-disc pl-5">
-            <li>Currently building: PIKARU Asset Management (Next.js + Supabase + RLS)</li>
-            <li>Research: MySQL vs MongoDB performance for big-data web apps</li>
-            <li>Fun: HairzoneStyle — AI hairstyle changer web app</li>
-          </ul>
+          <span class="ml-3 text-[11px] text-code-dim">~/portfolio/intro.md</span>
         </div>
-        <div class="relative">
-          <div class="aspect-square rounded-2xl bg-gradient-to-br from-sky-200 to-sky-50 dark:from-sky-900/30 dark:to-slate-800 p-1">
-            <img alt="Wira avatar" src="https://avatars.githubusercontent.com/u/104241402?v=4" class="w-full h-full object-cover rounded-2xl"/>
+        <div class="p-6 md:p-8">
+          <p class="text-code-dim text-xs">// Hello World</p>
+          <h1 class="text-2xl md:text-4xl font-bold leading-tight mb-4">Hi, I'm <span class="text-cyan-300">Wira</span><span class="cursor-blink"></span></h1>
+          <p class="text-sm md:text-base text-slate-300/90 mb-6">Informatics Engineering @ UBD — building <span class="text-cyan-200">web apps</span> and <span class="text-violet-200">data/AI</span> projects. Turning ideas into fast, accessible products.</p>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700 text-xs">stack: Next.js · Laravel · Supabase · MySQL · MongoDB</span>
           </div>
-          <div class="absolute -bottom-3 -right-3 text-xs bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 shadow-soft">Based in Tangerang, ID</div>
+          <div class="flex flex-wrap gap-3">
+            <a href="#projects" class="btn rounded-lg bg-cyan-400/10 text-cyan-300 border border-cyan-300/30 hover:shadow-glow">run view_projects</a>
+            <a href="https://www.linkedin.com/in/pannavira/" target="_blank" class="btn rounded-lg border border-slate-700 hover:border-cyan-300/40">open linkedin</a>
+            <a href="mailto:work.pannavira@gmail.com" class="btn rounded-lg border border-slate-700 hover:border-cyan-300/40">send email</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Projects (auto-fetch via GitHub API) -->
-    <section id="projects" class="container mx-auto px-4 py-12">
-      <div class="flex items-end justify-between mb-6">
-        <h2 class="text-2xl md:text-3xl font-bold">Featured Projects</h2>
-        <a href="https://github.com/Pannavira?tab=repositories" class="text-sky-600 hover:underline text-sm">View all →</a>
+    <!-- Projects -->
+    <section id="projects" class="container mx-auto px-4 py-10">
+      <div class="flex items-end justify-between mb-5">
+        <h2 class="text-xl md:text-2xl font-bold">// Featured Projects</h2>
+        <a href="https://github.com/Pannavira?tab=repositories" class="text-cyan-300 hover:underline text-xs md:text-sm">view_all →</a>
       </div>
-      <div id="projectGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <div id="projectGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
       <template id="projectCardTmpl">
-        <a class="block group rounded-2xl border border-slate-200 dark:border-slate-800 p-5 hover:shadow-soft transition bg-white dark:bg-slate-800" target="_blank" rel="noopener">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="font-semibold group-hover:text-sky-600 truncate"></h3>
-            <span class="text-xs rounded-full bg-slate-100 dark:bg-slate-700 px-2 py-1 repo-language"></span>
+        <a class="block group rounded-xl code-window bg-code-panel hover:shadow-glow transition" target="_blank" rel="noopener">
+          <div class="code-bar px-3 py-2 border-b border-slate-800 flex items-center justify-between">
+            <span class="text-[11px] text-code-dim"><span class="text-cyan-300">repo</span> / <span class="filename"></span></span>
+            <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800/70 border border-slate-700 repo-language"></span>
           </div>
-          <p class="text-sm text-slate-600 dark:text-slate-300 line-clamp-3 repo-desc"></p>
-          <div class="mt-4 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-            <span class="stars">★ 0</span>
-            <span class="updated">Updated —</span>
+          <div class="p-4">
+            <h3 class="font-semibold group-hover:text-cyan-300 truncate"></h3>
+            <p class="mt-2 text-sm text-slate-300/90 line-clamp-3 repo-desc"></p>
+            <div class="mt-4 flex items-center justify-between text-[11px] text-code-dim">
+              <span class="stars">★ 0</span>
+              <span class="updated">updated —</span>
+            </div>
           </div>
         </a>
       </template>
     </section>
 
     <!-- Experience / Education -->
-    <section id="experience" class="container mx-auto px-4 py-12">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6">Experience & Education</h2>
-      <ol class="relative border-l border-slate-200 dark:border-slate-800 ml-3">
-        <li class="mb-8 ml-6">
-          <div class="absolute w-3 h-3 bg-sky-500 rounded-full -left-1.5 mt-2"></div>
-          <h3 class="font-semibold">Informatics Engineering — Universitas Buddhi Dharma</h3>
-          <p class="text-sm text-slate-600 dark:text-slate-300">Focus: Web Dev, Data, AI/ML • 2022—present</p>
-        </li>
-        <li class="mb-8 ml-6">
-          <div class="absolute w-3 h-3 bg-sky-500 rounded-full -left-1.5 mt-2"></div>
-          <h3 class="font-semibold">Freelance Web Developer</h3>
-          <p class="text-sm text-slate-600 dark:text-slate-300">Next.js, Laravel, WordPress/Elementor • Delivered e‑course sites & dashboards</p>
-        </li>
-        <li class="mb-2 ml-6">
-          <div class="absolute w-3 h-3 bg-sky-500 rounded-full -left-1.5 mt-2"></div>
-          <h3 class="font-semibold">Research — MySQL vs MongoDB Performance</h3>
-          <p class="text-sm text-slate-600 dark:text-slate-300">Benchmarking CRUD/aggregation & scaling strategies for web apps</p>
-        </li>
-      </ol>
+    <section id="experience" class="container mx-auto px-4 py-10">
+      <h2 class="text-xl md:text-2xl font-bold mb-5">// Experience & Education</h2>
+      <div class="grid gap-4">
+        <div class="code-window rounded-xl bg-code-panel">
+          <div class="code-bar px-3 py-2 border-b border-slate-800 text-[11px] text-code-dim">timeline.json</div>
+          <div class="p-5 text-sm">
+            <pre class="whitespace-pre-wrap text-slate-300/90">{
+  "2022–now": "Informatics Engineering — Universitas Buddhi Dharma (Web Dev, Data, AI/ML)",
+  "freelance": "Web Developer — Next.js, Laravel, WordPress e‑course & dashboards",
+  "research": "MySQL vs MongoDB performance for big‑data web apps"
+}</pre>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="container mx-auto px-4 py-12">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6">Skills</h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800">
-          <h3 class="font-semibold mb-2">Frontend</h3>
-          <p class="text-sm text-slate-600 dark:text-slate-300">React, Next.js, Tailwind, Shadcn UI, Charts, Responsive UX</p>
-        </div>
-        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800">
-          <h3 class="font-semibold mb-2">Backend</h3>
-          <p class="text-sm text-slate-600 dark:text-slate-300">Node.js, Laravel, REST APIs, Supabase (Auth, RLS), Prisma/ORM</p>
-        </div>
-        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800">
-          <h3 class="font-semibold mb-2">Data & ML</h3>
-          <p class="text-sm text-slate-600 dark:text-slate-300">Python, Pandas, Scikit-learn, basic CV/LLM APIs, Visualization</p>
-        </div>
-        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800">
-          <h3 class="font-semibold mb-2">Databases</h3>
-          <p class="text-sm text-slate-600 dark:text-slate-300">MySQL, MongoDB, PostgreSQL, Query Optimization, Indexing</p>
-        </div>
-        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800">
-          <h3 class="font-semibold mb-2">Cloud & Tools</h3>
-          <p class="text-sm text-slate-600 dark:text-slate-300">GitHub Actions, Vercel, Docker (basic), Netlify, CI/CD</p>
-        </div>
-        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800">
-          <h3 class="font-semibold mb-2">Soft Skills</h3>
-          <p class="text-sm text-slate-600 dark:text-slate-300">Communication, Documentation, Mentoring, Problem‑solving</p>
+    <section id="skills" class="container mx-auto px-4 py-10">
+      <h2 class="text-xl md:text-2xl font-bold mb-5">// Skills</h2>
+      <div class="code-window rounded-xl bg-code-panel">
+        <div class="code-bar px-3 py-2 border-b border-slate-800 text-[11px] text-code-dim">skills.ts</div>
+        <div class="p-5">
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">React</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Next.js</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Tailwind</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Node.js</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Laravel</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Supabase (Auth/RLS)</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">MySQL</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">MongoDB</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Python</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Data Viz</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="container mx-auto px-4 py-12">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div>
-            <h2 class="text-2xl md:text-3xl font-bold">Let's build something!</h2>
-            <p class="text-slate-600 dark:text-slate-300">Open for internships, freelance, and collaborations.</p>
+    <!-- Contact (minimal) -->
+    <section id="contact" class="container mx-auto px-4 py-10">
+      <div class="code-window rounded-xl bg-code-panel">
+        <div class="code-bar px-3 py-2 border-b border-slate-800 text-[11px] text-code-dim">contact.env</div>
+        <div class="p-6 md:p-8">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <a href="mailto:work.pannavira@gmail.com" class="btn rounded-lg bg-cyan-400/10 text-cyan-300 border border-cyan-300/30 hover:shadow-glow text-center">EMAIL=work.pannavira@gmail.com</a>
+            <a href="https://www.linkedin.com/in/pannavira/" target="_blank" class="btn rounded-lg border border-slate-700 hover:border-cyan-300/40 text-center">LINKEDIN=/in/pannavira</a>
+            <a href="https://github.com/Pannavira" target="_blank" class="btn rounded-lg border border-slate-700 hover:border-cyan-300/40 text-center sm:col-span-2">GITHUB=@Pannavira</a>
           </div>
-          <div class="flex flex-wrap gap-3">
-            <a href="mailto:work.pannavira@gmail.com" class="btn rounded-xl bg-sky-600 text-white hover:bg-sky-700">Email</a>
-            <a href="https://www.linkedin.com/in/pannavira/" target="_blank" class="btn rounded-xl border border-slate-300 dark:border-slate-700">LinkedIn</a>
-            <a href="https://github.com/Pannavira" target="_blank" class="btn rounded-xl border border-slate-300 dark:border-slate-700">GitHub</a>
-          </div>
+          <!-- Optional Formspree (replace) -->
+          <form action="https://formspree.io/f/your-id" method="POST" class="mt-6 grid sm:grid-cols-2 gap-3">
+            <input name="name" required placeholder="NAME" class="rounded-lg border border-slate-700 bg-slate-900/60 px-4 py-3" />
+            <input type="email" name="email" required placeholder="EMAIL" class="rounded-lg border border-slate-700 bg-slate-900/60 px-4 py-3" />
+            <textarea name="message" required placeholder="MESSAGE" class="sm:col-span-2 rounded-lg border border-slate-700 bg-slate-900/60 px-4 py-3 h-28"></textarea>
+            <button class="sm:col-span-2 btn rounded-lg bg-cyan-400/10 text-cyan-300 border border-cyan-300/30 hover:shadow-glow">submit()</button>
+          </form>
         </div>
-        <!-- Optional Formspree (replace with your endpoint) -->
-        <form action="https://formspree.io/f/your-id" method="POST" class="mt-6 grid sm:grid-cols-2 gap-4">
-          <input name="name" required placeholder="Your name" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3" />
-          <input type="email" name="email" required placeholder="Your email" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3" />
-          <textarea name="message" required placeholder="Tell me about the project..." class="sm:col-span-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 h-32"></textarea>
-          <button class="sm:col-span-2 btn rounded-xl bg-sky-600 text-white hover:bg-sky-700">Send Message</button>
-        </form>
       </div>
     </section>
 
-    <footer class="container mx-auto px-4 py-10 text-center text-sm text-slate-500 dark:text-slate-400">
-      <div>© <span id="year"></span> Wira • Built with Tailwind • Hosted on GitHub Pages</div>
+    <footer class="container mx-auto px-4 py-10 text-center text-xs text-code-dim">
+      <div>© <span id="year"></span> Wira · Built with Tailwind · Hosted on GitHub Pages</div>
     </footer>
 
     <!-- Scripts -->
@@ -217,12 +222,10 @@
 
       // Theme toggle persistence
       const themeToggle = document.getElementById('themeToggle');
-      const themeIcon = document.getElementById('themeIcon');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const prefersDark = true; // lean into code vibes
       const saved = localStorage.getItem('theme');
       const setTheme = (val) => {
         document.documentElement.classList.toggle('dark', val === 'dark');
-        themeIcon.textContent = val === 'dark' ? '☀️' : '🌙';
         localStorage.setItem('theme', val);
       };
       setTheme(saved || (prefersDark ? 'dark' : 'light'));
@@ -231,16 +234,14 @@
         setTheme(next);
       });
 
-      // Fetch some public repos and render cards
+      // Fetch public repos and render cards
       async function loadRepos() {
         try {
           const res = await fetch('https://api.github.com/users/Pannavira/repos?sort=updated&per_page=9');
           const repos = await res.json();
           const grid = document.getElementById('projectGrid');
           const tmpl = document.getElementById('projectCardTmpl');
-
           const featuredKeywords = ['pikar', 'asset', 'hair', 'style', 'mysql', 'mongo', 'api', 'dashboard'];
-
           repos
             .filter(r => !r.fork)
             .sort((a,b) => {
@@ -254,26 +255,20 @@
               const card = node.querySelector('a');
               card.href = repo.html_url;
               node.querySelector('h3').textContent = repo.name;
+              node.querySelector('.filename').textContent = repo.name + '.md';
               node.querySelector('.repo-desc').textContent = repo.description || 'No description provided.';
               node.querySelector('.repo-language').textContent = repo.language || '—';
               node.querySelector('.stars').textContent = `★ ${repo.stargazers_count}`;
               const updated = new Date(repo.pushed_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
-              node.querySelector('.updated').textContent = `Updated ${updated}`;
+              node.querySelector('.updated').textContent = `updated ${updated}`;
               grid.appendChild(node);
             });
         } catch (e) {
           console.error('Repo load failed', e);
-          document.getElementById('projectGrid').innerHTML = '<p class="text-slate-500">Could not load repositories right now.</p>';
+          document.getElementById('projectGrid').innerHTML = '<p class="text-slate-400">// could not load repositories</p>';
         }
       }
       loadRepos();
     </script>
-
-    <!-- (Optional) Google Analytics - replace G-XXXX -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXX');
-    </script> -->
   </body>
 </html>
