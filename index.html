@@ -27,22 +27,33 @@
             },
             colors: {
               code: {
-                bg: '#0B1020',      // deep navy
-                panel: '#0F172A',   // slate-900-ish
-                ink: '#E2E8F0',     // slate-200
-                dim: '#94A3B8',     // slate-400
-                accent: '#22D3EE',  // cyan-400
-                accent2: '#A78BFA', // violet-400
-                success: '#10B981',
-                warn: '#F59E0B',
-                danger: '#EF4444',
+                bg: '#0B1020',
+                panel: '#0F172A',
+                ink: '#E2E8F0',
+                dim: '#94A3B8',
+                accent: '#22D3EE',
+                accent2: '#3B82F6'
               }
             },
             boxShadow: {
               glow: '0 0 0 1px rgba(34,211,238,0.25), 0 10px 30px rgba(34,211,238,0.08)'
             },
             backgroundImage: {
-              grid: 'linear-gradient(transparent 23px, rgba(148,163,184,0.08) 24px), linear-gradient(90deg, transparent 23px, rgba(148,163,184,0.08) 24px)',
+              grid: 'linear-gradient(transparent 23px, rgba(148,163,184,0.06) 24px), linear-gradient(90deg, transparent 23px, rgba(148,163,184,0.06) 24px)',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: 0, transform: 'translateY(20px)' },
+                '100%': { opacity: 1, transform: 'translateY(0)' },
+              },
+              pulseGlow: {
+                '0%,100%': { boxShadow: '0 0 0 0 rgba(34,211,238,0.4)' },
+                '50%': { boxShadow: '0 0 20px 4px rgba(34,211,238,0.6)' },
+              }
+            },
+            animation: {
+              fadeInUp: 'fadeInUp 0.8s ease-out forwards',
+              pulseGlow: 'pulseGlow 3s infinite ease-in-out'
             }
           }
         }
@@ -56,51 +67,35 @@
 
     <style>
       .container { max-width: 1060px; }
-      .btn { padding: .9rem 1.1rem; } /* larger mobile hit area */
+      .btn { padding: .9rem 1.1rem; }
       .cursor-blink::after { content: '▌'; animation: blink 1s steps(1,end) infinite; }
       @keyframes blink { 50% { opacity: 0; } }
-      .code-bar { background: linear-gradient(90deg, #22D3EE22, #A78BFA22); }
+      .code-bar { background: linear-gradient(90deg, #22D3EE22, #3B82F622); }
       .code-window { border: 1px solid rgba(148,163,184,.15); }
     </style>
-
-    <!-- JSON-LD Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Wira (Pannavira)",
-      "url": "https://pannavira.github.io/",
-      "sameAs": ["https://github.com/Pannavira","https://www.linkedin.com/in/pannavira/"],
-      "jobTitle": "Informatics Engineering Student",
-      "alumniOf": "Universitas Buddhi Dharma",
-      "knowsAbout": ["Web Development","Next.js","Laravel","Supabase","Data Science","AI/ML"]
-    }
-    </script>
   </head>
 
-  <body class="font-mono bg-code-bg text-code-ink dark:bg-code-bg dark:text-code-ink min-h-screen">
-    <!-- Subtle code grid background -->
+  <body class="font-mono bg-code-bg text-code-ink min-h-screen">
     <div aria-hidden class="fixed inset-0 -z-10 bg-grid bg-[size:24px_24px]"></div>
 
-    <!-- Top Nav (code vibe) -->
-    <header class="sticky top-0 z-50 border-b border-slate-800/60 backdrop-blur bg-code-bg/80">
+    <!-- Top Nav -->
+    <header class="sticky top-0 z-50 border-b border-slate-800/60 backdrop-blur bg-code-bg/80 animate-fadeInUp">
       <nav class="container mx-auto flex items-center justify-between px-4 py-3">
         <a href="#home" class="text-base font-semibold tracking-tight flex items-center gap-2">
-          <span class="text-cyan-300">&lt;/&gt;</span>
+          <span class="text-cyan-300 animate-pulseGlow">&lt;/&gt;</span>
           <span>Wira</span>
         </a>
         <div class="flex items-center gap-2 text-xs md:text-sm">
-          <a class="px-3 py-2 hover:text-cyan-300" href="#projects">projects()</a>
-          <a class="px-3 py-2 hover:text-cyan-300" href="#experience">experience()</a>
-          <a class="px-3 py-2 hover:text-cyan-300" href="#skills">skills()</a>
-          <a class="px-3 py-2 hover:text-cyan-300" href="#contact">contact()</a>
-          <button id="themeToggle" aria-label="Toggle dark mode" class="btn rounded-lg border border-slate-800 hover:shadow-glow">theme.toggle()</button>
+          <a class="px-3 py-2 hover:text-cyan-300 transition-colors" href="#projects">projects()</a>
+          <a class="px-3 py-2 hover:text-cyan-300 transition-colors" href="#experience">experience()</a>
+          <a class="px-3 py-2 hover:text-cyan-300 transition-colors" href="#skills">skills()</a>
+          <button id="themeToggle" aria-label="Toggle dark mode" class="btn rounded-lg border border-slate-800 hover:shadow-glow transition">theme.toggle()</button>
         </div>
       </nav>
     </header>
 
-    <!-- Hero / Intro like a terminal banner -->
-    <section id="home" class="container mx-auto px-4 pt-10 pb-14">
+    <!-- Hero -->
+    <section id="home" class="container mx-auto px-4 pt-10 pb-14 animate-fadeInUp">
       <div class="code-window rounded-xl overflow-hidden shadow-glow bg-code-panel">
         <div class="code-bar flex items-center gap-2 px-3 py-2 border-b border-slate-800">
           <div class="flex gap-1.5">
@@ -111,30 +106,30 @@
           <span class="ml-3 text-[11px] text-code-dim">~/portfolio/intro.md</span>
         </div>
         <div class="p-6 md:p-8">
-          <p class="text-code-dim text-xs">// Hello World</p>
-          <h1 class="text-2xl md:text-4xl font-bold leading-tight mb-4">Hi, I'm <span class="text-cyan-300">Wira</span><span class="cursor-blink"></span></h1>
-          <p class="text-sm md:text-base text-slate-300/90 mb-6">Informatics Engineering @ UBD — building <span class="text-cyan-200">web apps</span> and <span class="text-violet-200">data/AI</span> projects. Turning ideas into fast, accessible products.</p>
-          <div class="flex flex-wrap gap-2 mb-6">
+          <p class="text-code-dim text-xs animate-fadeInUp" style="animation-delay:0.2s">// Hello World</p>
+          <h1 class="text-2xl md:text-4xl font-bold leading-tight mb-4 animate-fadeInUp" style="animation-delay:0.4s">Hi, I'm <span class="text-cyan-300">Wira</span><span class="cursor-blink"></span></h1>
+          <p class="text-sm md:text-base text-slate-300/90 mb-6 animate-fadeInUp" style="animation-delay:0.6s">Informatics Engineering @ UBD — building <span class="text-cyan-200">web apps</span> and <span class="text-blue-300">data/AI</span> projects. Turning ideas into fast, accessible products.</p>
+          <div class="flex flex-wrap gap-2 mb-6 animate-fadeInUp" style="animation-delay:0.8s">
             <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700 text-xs">stack: Next.js · Laravel · Supabase · MySQL · MongoDB</span>
           </div>
-          <div class="flex flex-wrap gap-3">
-            <a href="#projects" class="btn rounded-lg bg-cyan-400/10 text-cyan-300 border border-cyan-300/30 hover:shadow-glow">run view_projects</a>
-            <a href="https://www.linkedin.com/in/pannavira/" target="_blank" class="btn rounded-lg border border-slate-700 hover:border-cyan-300/40">open linkedin</a>
-            <a href="mailto:work.pannavira@gmail.com" class="btn rounded-lg border border-slate-700 hover:border-cyan-300/40">send email</a>
+          <div class="flex flex-wrap gap-3 animate-fadeInUp" style="animation-delay:1s">
+            <a href="#projects" class="btn rounded-lg bg-cyan-400/10 text-cyan-300 border border-cyan-300/30 hover:shadow-glow transition">run view_projects</a>
+            <a href="https://www.linkedin.com/in/pannavira/" target="_blank" class="btn rounded-lg border border-slate-700 hover:border-cyan-300/40 transition">open linkedin</a>
+            <a href="mailto:work.pannavira@gmail.com" class="btn rounded-lg border border-slate-700 hover:border-cyan-300/40 transition">send email</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Projects -->
-    <section id="projects" class="container mx-auto px-4 py-10">
+    <section id="projects" class="container mx-auto px-4 py-10 animate-fadeInUp">
       <div class="flex items-end justify-between mb-5">
         <h2 class="text-xl md:text-2xl font-bold">// Featured Projects</h2>
         <a href="https://github.com/Pannavira?tab=repositories" class="text-cyan-300 hover:underline text-xs md:text-sm">view_all →</a>
       </div>
       <div id="projectGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
       <template id="projectCardTmpl">
-        <a class="block group rounded-xl code-window bg-code-panel hover:shadow-glow transition" target="_blank" rel="noopener">
+        <a class="block group rounded-xl code-window bg-code-panel hover:shadow-glow transition transform hover:-translate-y-1 hover:scale-[1.02]" target="_blank" rel="noopener">
           <div class="code-bar px-3 py-2 border-b border-slate-800 flex items-center justify-between">
             <span class="text-[11px] text-code-dim"><span class="text-cyan-300">repo</span> / <span class="filename"></span></span>
             <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800/70 border border-slate-700 repo-language"></span>
@@ -151,11 +146,11 @@
       </template>
     </section>
 
-    <!-- Experience / Education -->
-    <section id="experience" class="container mx-auto px-4 py-10">
+    <!-- Experience -->
+    <section id="experience" class="container mx-auto px-4 py-10 animate-fadeInUp">
       <h2 class="text-xl md:text-2xl font-bold mb-5">// Experience & Education</h2>
       <div class="grid gap-4">
-        <div class="code-window rounded-xl bg-code-panel">
+        <div class="code-window rounded-xl bg-code-panel hover:shadow-glow transition transform hover:-translate-y-1 hover:scale-[1.01]">
           <div class="code-bar px-3 py-2 border-b border-slate-800 text-[11px] text-code-dim">timeline.json</div>
           <div class="p-5 text-sm">
             <pre class="whitespace-pre-wrap text-slate-300/90">{
@@ -169,9 +164,9 @@
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="container mx-auto px-4 py-10">
+    <section id="skills" class="container mx-auto px-4 py-10 animate-fadeInUp">
       <h2 class="text-xl md:text-2xl font-bold mb-5">// Skills</h2>
-      <div class="code-window rounded-xl bg-code-panel">
+      <div class="code-window rounded-xl bg-code-panel hover:shadow-glow transition transform hover:-translate-y-1 hover:scale-[1.01]">
         <div class="code-bar px-3 py-2 border-b border-slate-800 text-[11px] text-code-dim">skills.ts</div>
         <div class="p-5">
           <div class="flex flex-wrap gap-2 text-xs">
@@ -180,7 +175,7 @@
             <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Tailwind</span>
             <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Node.js</span>
             <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Laravel</span>
-            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Supabase (Auth/RLS)</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Supabase</span>
             <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">MySQL</span>
             <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">MongoDB</span>
             <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Python</span>
@@ -190,39 +185,14 @@
       </div>
     </section>
 
-    <!-- Contact (minimal) -->
-    <section id="contact" class="container mx-auto px-4 py-10">
-      <div class="code-window rounded-xl bg-code-panel">
-        <div class="code-bar px-3 py-2 border-b border-slate-800 text-[11px] text-code-dim">contact.env</div>
-        <div class="p-6 md:p-8">
-          <div class="grid sm:grid-cols-2 gap-4">
-            <a href="mailto:work.pannavira@gmail.com" class="btn rounded-lg bg-cyan-400/10 text-cyan-300 border border-cyan-300/30 hover:shadow-glow text-center">EMAIL=work.pannavira@gmail.com</a>
-            <a href="https://www.linkedin.com/in/pannavira/" target="_blank" class="btn rounded-lg border border-slate-700 hover:border-cyan-300/40 text-center">LINKEDIN=/in/pannavira</a>
-            <a href="https://github.com/Pannavira" target="_blank" class="btn rounded-lg border border-slate-700 hover:border-cyan-300/40 text-center sm:col-span-2">GITHUB=@Pannavira</a>
-          </div>
-          <!-- Optional Formspree (replace) -->
-          <form action="https://formspree.io/f/your-id" method="POST" class="mt-6 grid sm:grid-cols-2 gap-3">
-            <input name="name" required placeholder="NAME" class="rounded-lg border border-slate-700 bg-slate-900/60 px-4 py-3" />
-            <input type="email" name="email" required placeholder="EMAIL" class="rounded-lg border border-slate-700 bg-slate-900/60 px-4 py-3" />
-            <textarea name="message" required placeholder="MESSAGE" class="sm:col-span-2 rounded-lg border border-slate-700 bg-slate-900/60 px-4 py-3 h-28"></textarea>
-            <button class="sm:col-span-2 btn rounded-lg bg-cyan-400/10 text-cyan-300 border border-cyan-300/30 hover:shadow-glow">submit()</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <footer class="container mx-auto px-4 py-10 text-center text-xs text-code-dim">
+    <footer class="container mx-auto px-4 py-10 text-center text-xs text-code-dim animate-fadeInUp">
       <div>© <span id="year"></span> Wira · Built with Tailwind · Hosted on GitHub Pages</div>
     </footer>
 
-    <!-- Scripts -->
     <script>
-      // Year
       document.getElementById('year').textContent = new Date().getFullYear();
-
-      // Theme toggle persistence
       const themeToggle = document.getElementById('themeToggle');
-      const prefersDark = true; // lean into code vibes
+      const prefersDark = true;
       const saved = localStorage.getItem('theme');
       const setTheme = (val) => {
         document.documentElement.classList.toggle('dark', val === 'dark');
@@ -233,23 +203,20 @@
         const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
         setTheme(next);
       });
-
-      // Fetch public repos and render cards
       async function loadRepos() {
         try {
           const res = await fetch('https://api.github.com/users/Pannavira/repos?sort=updated&per_page=9');
           const repos = await res.json();
           const grid = document.getElementById('projectGrid');
           const tmpl = document.getElementById('projectCardTmpl');
-          const featuredKeywords = ['pikar', 'asset', 'hair', 'style', 'mysql', 'mongo', 'api', 'dashboard'];
-          repos
-            .filter(r => !r.fork)
+          const featuredKeywords = ['pikar','asset','hair','style','mysql','mongo','api','dashboard'];
+          repos.filter(r => !r.fork)
             .sort((a,b) => {
               const aFeat = featuredKeywords.some(k => (a.name + ' ' + (a.description||'')).toLowerCase().includes(k));
               const bFeat = featuredKeywords.some(k => (b.name + ' ' + (b.description||'')).toLowerCase().includes(k));
               return (bFeat - aFeat) || (new Date(b.pushed_at) - new Date(a.pushed_at));
             })
-            .slice(0, 6)
+            .slice(0,6)
             .forEach(repo => {
               const node = tmpl.content.cloneNode(true);
               const card = node.querySelector('a');
@@ -259,11 +226,11 @@
               node.querySelector('.repo-desc').textContent = repo.description || 'No description provided.';
               node.querySelector('.repo-language').textContent = repo.language || '—';
               node.querySelector('.stars').textContent = `★ ${repo.stargazers_count}`;
-              const updated = new Date(repo.pushed_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+              const updated = new Date(repo.pushed_at).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
               node.querySelector('.updated').textContent = `updated ${updated}`;
               grid.appendChild(node);
             });
-        } catch (e) {
+        } catch(e){
           console.error('Repo load failed', e);
           document.getElementById('projectGrid').innerHTML = '<p class="text-slate-400">// could not load repositories</p>';
         }
