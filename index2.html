@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wira — Portfolio</title>
+    <meta name="description" content="Wira (Pannavira) — Informatics Engineering student. Web dev, data, and AI/ML projects." />
+    <meta name="theme-color" content="#0ea5e9" />
+
+    <!-- OpenGraph / Twitter -->
+    <meta property="og:title" content="Wira — Portfolio" />
+    <meta property="og:description" content="Web dev • Data • AI/ML. Projects, resume, contact." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pannavira.github.io/" />
+    <meta property="og:image" content="https://pannavira.github.io/og-banner.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "monospace"],
+            },
+            colors: {
+              code: {
+                bg: '#0B1020',
+                panel: '#0F172A',
+                ink: '#E2E8F0',
+                dim: '#94A3B8',
+                accent: '#22D3EE',
+                accent2: '#3B82F6'
+              }
+            },
+            boxShadow: {
+              glow: '0 0 0 1px rgba(34,211,238,0.25), 0 10px 30px rgba(34,211,238,0.08)'
+            },
+            backgroundImage: {
+              grid: 'linear-gradient(transparent 23px, rgba(148,163,184,0.06) 24px), linear-gradient(90deg, transparent 23px, rgba(148,163,184,0.06) 24px)',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: 0, transform: 'translateY(20px)' },
+                '100%': { opacity: 1, transform: 'translateY(0)' },
+              },
+              pulseGlow: {
+                '0%,100%': { boxShadow: '0 0 0 0 rgba(34,211,238,0.4)' },
+                '50%': { boxShadow: '0 0 20px 4px rgba(34,211,238,0.6)' },
+              }
+            },
+            animation: {
+              fadeInUp: 'fadeInUp 0.8s ease-out forwards',
+              pulseGlow: 'pulseGlow 3s infinite ease-in-out'
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+      .container { max-width: 1060px; }
+      .btn { padding: .9rem 1.1rem; }
+      .cursor-blink::after { content: '▌'; animation: blink 1s steps(1,end) infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+      .code-bar { background: linear-gradient(90deg, #22D3EE22, #3B82F622); }
+      .code-window { border: 1px solid rgba(148,163,184,.15); }
+    </style>
+  </head>
+
+  <body class="font-mono bg-code-bg text-code-ink min-h-screen">
+    <div aria-hidden class="fixed inset-0 -z-10 bg-grid bg-[size:24px_24px]"></div>
+
+    <!-- Top Nav -->
+    <header class="sticky top-0 z-50 border-b border-slate-800/60 backdrop-blur bg-code-bg/80 animate-fadeInUp">
+      <nav class="container mx-auto flex items-center justify-between px-4 py-3">
+        <a href="#home" class="text-base font-semibold tracking-tight flex items-center gap-2">
+          <span class="text-cyan-300 animate-pulseGlow">&lt;/&gt;</span>
+          <span>Wira</span>
+        </a>
+        <div class="flex items-center gap-2 text-xs md:text-sm">
+          <a class="px-3 py-2 hover:text-cyan-300 transition-colors" href="#projects">projects()</a>
+          <a class="px-3 py-2 hover:text-cyan-300 transition-colors" href="#experience">experience()</a>
+          <a class="px-3 py-2 hover:text-cyan-300 transition-colors" href="#skills">skills()</a>
+          <button id="themeToggle" aria-label="Toggle dark mode" class="btn rounded-lg border border-slate-800 hover:shadow-glow transition">theme.toggle()</button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="container mx-auto px-4 pt-10 pb-14 animate-fadeInUp">
+      <div class="code-window rounded-xl overflow-hidden shadow-glow bg-code-panel">
+        <div class="code-bar flex items-center gap-2 px-3 py-2 border-b border-slate-800">
+          <div class="flex gap-1.5">
+            <span class="h-3 w-3 rounded-full bg-red-400/60"></span>
+            <span class="h-3 w-3 rounded-full bg-yellow-400/60"></span>
+            <span class="h-3 w-3 rounded-full bg-green-400/60"></span>
+          </div>
+          <span class="ml-3 text-[11px] text-code-dim">~/portfolio/intro.md</span>
+        </div>
+        <div class="p-6 md:p-8">
+          <p class="text-code-dim text-xs animate-fadeInUp" style="animation-delay:0.2s">// Hello World</p>
+          <h1 class="text-2xl md:text-4xl font-bold leading-tight mb-4 animate-fadeInUp" style="animation-delay:0.4s">Hi, I'm <span class="text-cyan-300">Wira</span><span class="cursor-blink"></span></h1>
+          <p class="text-sm md:text-base text-slate-300/90 mb-6 animate-fadeInUp" style="animation-delay:0.6s">Informatics Engineering @ UBD — building <span class="text-cyan-200">web apps</span> and <span class="text-blue-300">data/AI</span> projects. Turning ideas into fast, accessible products.</p>
+          <div class="flex flex-wrap gap-2 mb-6 animate-fadeInUp" style="animation-delay:0.8s">
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700 text-xs">stack: Next.js · Laravel · Supabase · MySQL · MongoDB</span>
+          </div>
+          <div class="flex flex-wrap gap-3 animate-fadeInUp" style="animation-delay:1s">
+            <a href="#projects" class="btn rounded-lg bg-cyan-400/10 text-cyan-300 border border-cyan-300/30 hover:shadow-glow transition">run view_projects</a>
+            <a href="https://www.linkedin.com/in/pannavira/" target="_blank" class="btn rounded-lg border border-slate-700 hover:border-cyan-300/40 transition">open linkedin</a>
+            <a href="mailto:work.pannavira@gmail.com" class="btn rounded-lg border border-slate-700 hover:border-cyan-300/40 transition">send email</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="container mx-auto px-4 py-10 animate-fadeInUp">
+      <div class="flex items-end justify-between mb-5">
+        <h2 class="text-xl md:text-2xl font-bold">// Featured Projects</h2>
+        <a href="https://github.com/Pannavira?tab=repositories" class="text-cyan-300 hover:underline text-xs md:text-sm">view_all →</a>
+      </div>
+      <div id="projectGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      <template id="projectCardTmpl">
+        <a class="block group rounded-xl code-window bg-code-panel hover:shadow-glow transition transform hover:-translate-y-1 hover:scale-[1.02]" target="_blank" rel="noopener">
+          <div class="code-bar px-3 py-2 border-b border-slate-800 flex items-center justify-between">
+            <span class="text-[11px] text-code-dim"><span class="text-cyan-300">repo</span> / <span class="filename"></span></span>
+            <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800/70 border border-slate-700 repo-language"></span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold group-hover:text-cyan-300 truncate"></h3>
+            <p class="mt-2 text-sm text-slate-300/90 line-clamp-3 repo-desc"></p>
+            <div class="mt-4 flex items-center justify-between text-[11px] text-code-dim">
+              <span class="stars">★ 0</span>
+              <span class="updated">updated —</span>
+            </div>
+          </div>
+        </a>
+      </template>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="container mx-auto px-4 py-10 animate-fadeInUp">
+      <h2 class="text-xl md:text-2xl font-bold mb-5">// Experience & Education</h2>
+      <div class="grid gap-4">
+        <div class="code-window rounded-xl bg-code-panel hover:shadow-glow transition transform hover:-translate-y-1 hover:scale-[1.01]">
+          <div class="code-bar px-3 py-2 border-b border-slate-800 text-[11px] text-code-dim">timeline.json</div>
+          <div class="p-5 text-sm">
+            <pre class="whitespace-pre-wrap text-slate-300/90">{
+  "2022–now": "Informatics Engineering — Universitas Buddhi Dharma (Web Dev, Data, AI/ML)",
+  "freelance": "Web Developer — Next.js, Laravel, WordPress e‑course & dashboards",
+  "research": "MySQL vs MongoDB performance for big‑data web apps"
+}</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="container mx-auto px-4 py-10 animate-fadeInUp">
+      <h2 class="text-xl md:text-2xl font-bold mb-5">// Skills</h2>
+      <div class="code-window rounded-xl bg-code-panel hover:shadow-glow transition transform hover:-translate-y-1 hover:scale-[1.01]">
+        <div class="code-bar px-3 py-2 border-b border-slate-800 text-[11px] text-code-dim">skills.ts</div>
+        <div class="p-5">
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">React</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Next.js</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Tailwind</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Node.js</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Laravel</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Supabase</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">MySQL</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">MongoDB</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Python</span>
+            <span class="px-3 py-1 rounded bg-slate-800/70 border border-slate-700">Data Viz</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="container mx-auto px-4 py-10 text-center text-xs text-code-dim animate-fadeInUp">
+      <div>© <span id="year"></span> Wira · Built with Tailwind · Hosted on GitHub Pages</div>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+      const themeToggle = document.getElementById('themeToggle');
+      const prefersDark = true;
+      const saved = localStorage.getItem('theme');
+      const setTheme = (val) => {
+        document.documentElement.classList.toggle('dark', val === 'dark');
+        localStorage.setItem('theme', val);
+      };
+      setTheme(saved || (prefersDark ? 'dark' : 'light'));
+      themeToggle.addEventListener('click', () => {
+        const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+        setTheme(next);
+      });
+      async function loadRepos() {
+        try {
+          const res = await fetch('https://api.github.com/users/Pannavira/repos?sort=updated&per_page=9');
+          const repos = await res.json();
+          const grid = document.getElementById('projectGrid');
+          const tmpl = document.getElementById('projectCardTmpl');
+          const featuredKeywords = ['pikar','asset','hair','style','mysql','mongo','api','dashboard'];
+          repos.filter(r => !r.fork)
+            .sort((a,b) => {
+              const aFeat = featuredKeywords.some(k => (a.name + ' ' + (a.description||'')).toLowerCase().includes(k));
+              const bFeat = featuredKeywords.some(k => (b.name + ' ' + (b.description||'')).toLowerCase().includes(k));
+              return (bFeat - aFeat) || (new Date(b.pushed_at) - new Date(a.pushed_at));
+            })
+            .slice(0,6)
+            .forEach(repo => {
+              const node = tmpl.content.cloneNode(true);
+              const card = node.querySelector('a');
+              card.href = repo.html_url;
+              node.querySelector('h3').textContent = repo.name;
+              node.querySelector('.filename').textContent = repo.name + '.md';
+              node.querySelector('.repo-desc').textContent = repo.description || 'No description provided.';
+              node.querySelector('.repo-language').textContent = repo.language || '—';
+              node.querySelector('.stars').textContent = `★ ${repo.stargazers_count}`;
+              const updated = new Date(repo.pushed_at).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+              node.querySelector('.updated').textContent = `updated ${updated}`;
+              grid.appendChild(node);
+            });
+        } catch(e){
+          console.error('Repo load failed', e);
+          document.getElementById('projectGrid').innerHTML = '<p class="text-slate-400">// could not load repositories</p>';
+        }
+      }
+      loadRepos();
+    </script>
+  </body>
+</html>
